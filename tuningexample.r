@@ -81,3 +81,6 @@ aux = lapply(ctrls, function(ct) {
 # Retuning a list with results
 return(aux)
 
+#git remote add origin git@github.com:hildafab/cashinr.git
+#git push -u origin master
+
