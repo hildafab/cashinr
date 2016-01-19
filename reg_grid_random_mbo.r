@@ -184,16 +184,16 @@ mboTuningTask = function(oml.task.id, learner, par.set, budget) {
 
 main = function() {
   
-  sink(file = "output", append = FALSE, type = c("output", "message"),
-       split = FALSE)
+  sink(file = "output", append = TRUE, type = c("output", "message"),
+       split = TRUE)
 
-  task.id = 5141
+  task.id = 5146
   budget = 2
 
   lrn.ps = getregrLearnersAndParamSets();
   
   
-  regression_task_ids = c(5146,4763,4839,5038,5122,5141,5172,4841,4858,4877,5027,2294,2319,7573,3002,4818)
+  regression_task_ids = c(4763,4839,5038,5122,5141,5172,4841,4858,4877,5027,2294,2319,7573,3002,4818)
   
   for(task.id in regression_task_ids){
     print(paste("Task ID:",task.id))
