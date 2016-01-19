@@ -36,14 +36,14 @@ ps4 = makeParamSet(
 )
 
 # Fast knn classifier
-#lrn5 = makeLearner("classif.fnn", predict.type="prob")
+#lrn5 = makeLearner("classif.fnn") #, predict.type="prob")
 # Fast knn hyper-parameter search space
 #ps5 = makeParamSet(
 
 #)
 
 # knn classifier
-#lrn6 = makeLearner("classif.IBk") #, predict.type="prob")
+#lrn6 = makeLearner("classif.IBk") #) #, predict.type="prob")
 # Knn hyper-parameter search space
 #ps6 = makeParamSet(
 
@@ -73,24 +73,31 @@ getControls = function(){
 BUDGET = 250
 
 # Grid Search 
-ctrl.grid   = makeTuneControlGrid(resolution=round(sqrt(BUDGET))) # 2 dimensions
+#ctrl.grid   = makeTuneControlGrid(resolution=round(sqrt(BUDGET))) # 2 dimensions
 
 #Random Search
-ctrl.random = makeTuneControlRandom(maxit=BUDGET)
+#ctrl.random = makeTuneControlRandom(maxit=BUDGET)
 
 #IRace
-ctrl.irace  = makeTuneControlIrace(maxExperiments = BUDGET)
+#ctrl.irace  = makeTuneControlIrace(maxExperiments = BUDGET)
 
 #GenSA
-ctrl.gensa = makeTuneControlGenSA(budget = BUDGET)
+#ctrl.gensa = makeTuneControlGenSA(budget = BUDGET)
 
 #CMAES
-ctrl.cmaes = makeTuneControlCMAES(budget = BUDGET)
+#ctrl.cmaes = makeTuneControlCMAES(budget = BUDGET)
 
 #To Add - nn and pso
 
 # List of tuning controls
-ctrls = list(ctrl.grid, ctrl.random , ctrl.irace, ctrl.gensa, ctrl.cmaes)
+#ctrls = list(ctrl.grid, ctrl.random , ctrl.irace, ctrl.gensa, ctrl.cmaes)]
+
+library(mlrMBO)
+
+control = makeMBOControl(iters = 10L, init.design.points = 30L)
+control = setMBOControlInfill(control, crit = "ei")
+
+ctrls = list(control);
 
 return(ctrls)
 }
@@ -125,6 +132,72 @@ for (dataset.id in DatasetIds) {
 
 return(list(DatasetIds,TaskIds,dataset.names))
 
+}
+
+#get regression learners and parameter sets
+
+getregrLearnersAndParamSets = function(){
+  # SVM classifier
+  lrn1 = makeLearner("regr.svm") #, predict.type="prob")
+  # SVM hyper-parameter search space
+  ps1 = makeParamSet(
+    makeNumericParam("cost", lower=-15, upper=15, trafo=function(x) 2^x),
+    makeNumericParam("gamma", lower=-15, upper=15, trafo=function(x) 2^x)
+  )
+  
+  
+  # random forest classifier
+  lrn2 = makeLearner("regr.randomForest") #, predict.type="prob")
+  # random forest hyper-parameter search space
+  ps2 = makeParamSet(
+    makeIntegerParam("ntree", lower=1L, upper=500L),
+    makeIntegerParam("nodesize", lower = 1L, upper = 100L )
+  )
+  
+  
+  # neural network classifier
+  lrn3 = makeLearner("regr.nnet") #, predict.type="prob")
+  # neural network hyper-parameter search space
+  ps3 = makeParamSet(
+    makeIntegerParam("maxit", lower = 1, upper = 500)#,
+    #makeIntegerParam("size", lower = 0, upper = 10)
+  )
+  
+  #Decision Tree
+  lrn4 = makeLearner("regr.rpart") #, predict.type="prob")
+  # Decision Tree hyper-parameter search space
+  ps4 = makeParamSet(
+    makeIntegerParam("maxdepth", lower = 1, upper = 30),
+    makeIntegerParam("minsplit", lower = 1, upper = 500)
+  )
+  
+  # Fast knn classifier
+  #lrn5 = makeLearner("regr.fnn") #, predict.type="prob")
+  # Fast knn hyper-parameter search space
+  #ps5 = makeParamSet(
+  
+  #)
+  
+  # knn classifier
+  #lrn6 = makeLearner("regr.IBk") #) #, predict.type="prob")
+  # Knn hyper-parameter search space
+  #ps6 = makeParamSet(
+  
+  #)
+  
+  all.learners = list(lrn1,lrn2,lrn3,lrn4);
+  
+  learner = makeModelMultiplexer(base.learners = all.learner)
+  
+  all.parametersets = c(ps1,ps2,ps3,ps4)
+  #c(classif.svm = ps1, classif.randomForest = ps2, classif.avNNet=ps3, 
+  #classif.rpart=ps4)
+  
+  
+  paramsets = makeModelMultiplexerParamSet(learner, regr.svm = ps1, regr.randomForest = ps2, regr.nnet=ps3, 
+                                           regr.rpart=ps4)
+  
+  return(list(learner, paramsets));
 }
 
 
