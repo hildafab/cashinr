@@ -1,0 +1,78 @@
+[1] "Task ID: 5141"
+[1] "Learner regr.svm, RLearnerRegr, RLearner, Learner"
+ - Data imputation required ...
+[1] "Task ID: 4858"
+[1] "Learner regr.svm, RLearnerRegr, RLearner, Learner"
+[1] "Control TuneControlRandom, TuneControl, OptControl"
+[1] "Control TuneControlGrid, TuneControl, OptControl"
+[[1]]
+Resample Result
+Task: OpenML-Task-4858
+Learner: regr.svm.tuned
+mse.aggr: 4.47
+mse.mean: 4.47
+mse.sd: 5.50
+rmse.aggr: 2.11
+rmse.mean: 1.81
+rmse.sd: 1.15
+timetrain.aggr: 118.91
+timetrain.mean: 118.91
+timetrain.sd: 9.64
+timepredict.aggr: 0.01
+timepredict.mean: 0.01
+timepredict.sd: 0.01
+timeboth.aggr: 118.92
+timeboth.mean: 118.92
+timeboth.sd: 9.64
+Runtime: 19.8225
+
+[[2]]
+Resample Result
+Task: OpenML-Task-4858
+Learner: regr.svm.tuned
+mse.aggr: 4.11
+mse.mean: 4.11
+mse.sd: 5.23
+rmse.aggr: 2.03
+rmse.mean: 1.71
+rmse.sd: 1.15
+timetrain.aggr: 131.62
+timetrain.mean: 131.62
+timetrain.sd: 9.84
+timepredict.aggr: 0.00
+timepredict.mean: 0.00
+timepredict.sd: 0.00
+timeboth.aggr: 131.62
+timeboth.mean: 131.62
+timeboth.sd: 9.84
+Runtime: 21.9386
+
+[1] "Control MBOControl"
+$cost
+[1] 4.730608
+
+$gamma
+[1] 0.0001144993
+
+Resample Result
+Task: OpenML-Task-4858
+Learner: regr.svm.bagged
+mse.aggr: 38.59
+mse.mean: 38.59
+mse.sd: 48.75
+rmse.aggr: 6.21
+rmse.mean: 4.82
+rmse.sd: 4.14
+timetrain.aggr: 0.41
+timetrain.mean: 0.41
+timetrain.sd: 0.03
+timepredict.aggr: 0.06
+timepredict.mean: 0.06
+timepredict.sd: 0.01
+timeboth.aggr: 0.46
+timeboth.mean: 0.46
+timeboth.sd: 0.03
+Runtime: 4.73669
+[1] "Learner regr.randomForest, RLearnerRegr, RLearner, Learner"
+[1] "Control TuneControlRandom, TuneControl, OptControl"
+[1] "Control TuneControlGrid, TuneControl, OptControl"
