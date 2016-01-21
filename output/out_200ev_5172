@@ -116,3 +116,34 @@ timeboth.sd: 7.48
 Runtime: 3.40938
 
 [1] "Control MBOControl"
+$mtry
+[1] 999
+
+$ntree
+[1] 247
+
+$nodesize
+[1] 349
+
+Resample Result
+Task: OpenML-Task-5172
+Learner: regr.randomForest.bagged
+mse.aggr: 1450.06
+mse.mean: 1450.06
+mse.sd: 255.53
+rmse.aggr: 38.08
+rmse.mean: 37.94
+rmse.sd: 3.38
+timetrain.aggr: 0.11
+timetrain.mean: 0.11
+timetrain.sd: 0.01
+timepredict.aggr: 0.04
+timepredict.mean: 0.04
+timepredict.sd: 0.01
+timeboth.aggr: 0.14
+timeboth.mean: 0.14
+timeboth.sd: 0.01
+Runtime: 1.46884
+[1] "Learner regr.rpart, RLearnerRegr, RLearner, Learner"
+[1] "Control TuneControlRandom, TuneControl, OptControl"
+[1] "Control TuneControlGrid, TuneControl, OptControl"
